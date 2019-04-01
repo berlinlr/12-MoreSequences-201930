@@ -71,12 +71,13 @@ def run_test_generate_points_on_circle():
     # Test 2:  (YOU write THIS test)
     # -------------------------------------------------------------------------
     # Test 2:
-    expected = [rg.Point(125.0, 90.2),  # All numbers are approximate.
-                rg.Point(112.5, 80.5),
-                rg.Point(70.1, 71.7),
+    expected = [rg.Point(150, 200),  # All numbers are approximate.
+                rg.Point(100, 250),
+                rg.Point(50, 200),
+                rg.Point(100,150)
                ]
-    circle = rg.Circle(rg.Point(100, 50), 25)
-    answer = generate_points_on_circle(circle, 3)
+    circle = rg.Circle(rg.Point(100, 200), 50)
+    answer = generate_points_on_circle(circle, 4)
 
     print('Expected:', expected)
     print('Actual:  ', answer)
@@ -188,10 +189,11 @@ def run_test_draw_points_on_circle():
     # Test 4:  (YOU write THIS test)
     # -------------------------------------------------------------------------
     # Test 2:
-    title = 'DRAW_POINTS_ON_CIRCLE, test 2:  5 red dots.'
-    window = rg.RoseWindow(300, 300, title)
+    title = 'DRAW_POINTS_ON_CIRCLE, test 2:  40 red dots.'
+    window = rg.RoseWindow(400, 400, title)
     circle = rg.Circle(rg.Point(200, 200), 150)
-    draw_points_on_circle(window, circle, 5, 'red')
+    circle.fill_color= 'black'
+    draw_points_on_circle(window, circle, 40, 'red')
     window.close_on_mouse_click()
 
 def draw_points_on_circle(window, circle, number_of_points, color):
@@ -230,7 +232,7 @@ def draw_points_on_circle(window, circle, number_of_points, color):
       :type color:            str
     """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPLEMENTATION REQUIREMENT:
@@ -239,6 +241,15 @@ def draw_points_on_circle(window, circle, number_of_points, color):
     #
     # Your professor may do this exercise with you as "live coding".
     # -------------------------------------------------------------------------
+
+    circle.attach_to(window)
+    points= generate_points_on_circle(circle,number_of_points)
+    for k in range(len(points)):
+        dot = rg.Circle(points[k],10)
+        dot.fill_color = color
+        dot.attach_to(window)
+        points[k].attach_to(window)
+    window.render()
 
 
 def run_test_pizza():
